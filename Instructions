@@ -1,0 +1,127 @@
+«Algorithms for massive data»
+Master in Data Science for Economics
+Projects for academic year 2024/25
+This document describes five projects for the «Algorithms for massive data» module taught at the Master in «Data Science for Economics» at the Università degli Studi di Milano. Submitting a successful project is compulsory before being admitted to the oral exam. The following sections describe the tasks and datasets associated with each project. The last section covers the details of project implementation and submission.
+
+Note that this document does not refer to the similar course «Algorithms for massive datasets» taught at the Master in «Computer Science» at the Università degli Studi di Milano. Students from this master should refer to a specific document which will be published at the end of May 2025.
+Dataset
+All projects are based on the Amazon Books Review dataset, published on Kaggle under the public domain CC0 license. The dataset should be downloaded during code execution, authenticating using the Kaggle API (https://github.com/Kaggle/kaggle-api), for instance via  the following code:
+
+import os
+os.environ['KAGGLE_USERNAME'] = "xxxxxx"
+os.environ['KAGGLE_KEY'] = "xxxxxx"
+!kaggle datasets download -d DATASET_LINK 
+
+Important: in the previous code snippet, you should replace DATASET_LINK with the kaggle identifier for the dataset to be downloaded, and "xxxxxx" with your kaggle API username and key in order to be able to run your code; however, in the final version of the project the "xxxxxx" strings should be re-introduced in order to not share sensitive information.
+
+Other ways to deal with the authentication without exposing your username and key are described at the URL https://www.kaggle.com/general/51898.
+You can choose to reasonably subsample the dataset, or to focus on specific sub-views (provided that the code scales up with data, as described in the last section). In these cases, it is advisable that a global variable is used to trigger either subsampling or the use of the whole data.
+Project 1: Finding similar items
+The task is to implement a detector of pairs of similar book reviews. You can choose how to encode reviews and how to measure their similarity, although a simple choice would be that of processing the review/text column of the Books_rating.csv file, using the Jaccard similarity.
+Project 2: Market-basket analysis
+The task is to implement a system finding frequent itemsets (aka market-basket analysis). The detector can consider as baskets:
+ the strings contained in the review/text column of the Books_rating.csv file, using words as items;
+the set of books reviewed by a same user, using books as items.
+Project 3: Link analysis
+The task is to implement a ranking system based on the PageRank index. The entities to be ranked can be users (linked together if they reviewed at least a same book) or books (linked together if they have been reviewed at least by two different users), but you can choose different entities and/or different strategies to define links.
+Project 4: Picture recognizer
+The task is to implement a Deep Neural Network (DNN) classifying the book covers, whose images are downloadable using the URLs in the column image of the books_data.csv file. It is expected that a model selection for some hyperparameters is executed, and that the generalization capability of the resulting DNN is suitably evaluated.
+Project 5: Your own!
+You can propose a specific project, on the same datasets or on a different one, although its contents must be previously agreed with the teacher.
+Project implementation
+Important: the techniques used in order to analyze data have to scale up to larger datasets.
+
+The project can be carried out individually, or in groups of two students. Code should be written in Python 3.
+
+The project should be made available through a public github repository, containing code and a report describing the work done. 
+
+Code should be implemented using a jupyter notebook executable on Google colab, possibly adding a badge/link directly from the repository to the colab version of the notebook.
+
+The project report, preferably written in LaTeX, will be evaluated according to the following criteria:
+correctness of the general methodological approach,
+replicability of the experiments,
+scalability of the proposed solution,
+clarity of exposition.
+
+The report should contain the following information:
+the chosen dataset, and the parts of the latter which have been considered,
+how data have been organized,
+the applied pre-processing techniques,
+the considered algorithms and their implementations,
+how the proposed solution scales up with data size,
+a description of the experiments,
+comments and discussion on the experimental results.
+
+
+The report must also contain the following declaration: “I/We declare that this material, which I/We now submit for assessment, is entirely my/our own work and has not been taken from the work of others, save and to the extent that such work has been cited and acknowledged within the text of my/our work, and including any code produced using generative AI systems. I/We understand that plagiarism, collusion, and copying are grave and serious offences in the university and accept the penalties that would be imposed should I engage in plagiarism, collusion or copying. This assignment, or any part of it, has not been previously submitted by me/us or any other person for assessment on this or any other course of study.“
+
+Note that the above statement forbids the use of tools producing tools based on generative AI systems able to output code, such as ChatGPT or Copilot.
+
+Moreover, if the proposed solution is based on the ones published in Kaggle, or on any other preexisting project, this must be clearly stated, and the report should explain the differences and compare the experimental results.
+
+Once the project has been finalized, students should send an email to Prof. Malchiodi (dario DOT malchiodi AT unimi DOT it), specifying
+their names and student IDs,
+their enrollment in the Master in Data Science for Economics,
+a github link to the project.
+
+After the project is evaluated, students will be able to schedule an appointment for the oral discussion.
+
+These projects are valid for the academic year 2024/25. The deadlines for each exam sessions are listed in the module web page.
+
+
+
+
+
+
+
+
+
+My plan
+
+Objective:
+The goal of  Market basket analysis is to implement a system that identifies frequent itemsets, applying classic market-basket analysis techniques. The system must be able to extract and analyze patterns of co-occurrence within user behaviors or text content in the Amazon Books Review dataset.
+
+Dataset Used:
+
+Source: Amazon Books Review dataset (available on Kaggle under CC0 license)
+Main File: Books_rating.csv
+The dataset should be accessed using the Kaggle API during code execution, with proper handling of credentials.
+Two Basket Definition Approaches (choose one or explore both):
+
+Text-Based Basket:
+Each review is considered a "basket."
+Items are the individual words in the review/text column.
+Frequent word co-occurrences across reviews are extracted.
+User-Based Basket:
+Each user is treated as a basket.
+Items are the books they reviewed.
+The goal is to find books that are frequently reviewed together by the same users.
+Expected Output:
+
+Discovery of frequent itemsets using algorithms like Apriori or FP-Growth.
+Clear presentation of results showing top itemsets with their support values.
+Optionally: generate association rules with confidence and lift.
+Requirements and Guidelines:
+
+The project must scale to large data: subsampling is allowed during development, but scalability should be demonstrated in the report.
+Implemented in Python 3, preferably in a Jupyter notebook runnable on Google Colab.
+Code and a written LaTeX report must be submitted via GitHub (public repository).
+A badge or link to Colab execution should be included in the repository.
+The project can be done individually or in pairs.
+Preprocessing steps such as tokenization (for text) or user-book aggregation (for user-based analysis) must be clearly explained.
+Report Must Include:
+
+Dataset scope and filtering approach.
+Data organization strategy.
+Description of preprocessing methods (e.g., stopword removal, normalization).
+Algorithms used and rationale for selection.
+Experiments on various support thresholds.
+Performance discussion and scalability considerations.
+Insights derived from frequent itemsets.
+Mandatory academic integrity statement.
+
+
+
+
+
+
